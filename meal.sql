@@ -19,13 +19,15 @@ CREATE TABLE "mealplan" (
     CONSTRAINT "fk_mealplan_user" FOREIGN KEY ("user_id") REFERENCES "user" ("id")
 );
 
-CREATE TABLE "ingredients" (
+CREATE TABLE "meals" (
     "id" serial   NOT NULL,
-    "name" text   NOT NULL,
-    "calories" integer   NOT NULL,
-    CONSTRAINT "pk_ingredients" PRIMARY KEY (
+    "mealplan_id" integer   NOT NULL,
+    "time_of_day" text   NOT NULL,
+    "estimated_calories" integer   NOT NULL,
+    CONSTRAINT "pk_meals" PRIMARY KEY (
         "id"
-     )
+     ),
+    CONSTRAINT "fk_meals_mealplan" FOREIGN KEY ("mealplan_id") REFERENCES "mealplan" ("id")
 );
 
 CREATE TABLE "meal_ingredients" (
