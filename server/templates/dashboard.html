@@ -1,0 +1,66 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Welcome, {{ current_user.username }}!</h2>
+
+<form action="{{ url_for('generate_meal_route') }}" method="post">
+  <form action="{{ url_for('generate_meal_route') }}" method="post">
+  <div class="form-group">
+    <label for="cuisine-select">Cuisine Type:</label>
+    <select id="cuisine-select" name="cuisine-input" required>
+      <option value="" disabled selected>Select a Cuisine</option>
+      <option value="italian">Italian</option>
+      <option value="french">French</option>
+      <option value="chinese">Chinese</option>
+      <option value="japanese">Japanese</option>
+      <option value="mexican">Mexican</option>
+      <option value="indian">Indian</option>
+      <option value="thai">Thai</option>
+      <option value="greek">Greek</option>
+      <option value="spanish">Spanish</option>
+      <option value="american">American</option>
+      <option value="mediterranean">Mediterranean</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="cal-input">Calorie Limit:</label>
+    <input type="text" id="cal-input" name="cal-input" required />
+  </div>
+  <input type="submit" value="Generate New Meal Plan" />
+</form>
+
+{% if meal_plans|length > 0 %}
+<h3>Your Personalized Meal Plans:</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Date Created</th>
+            <th>Meal Plan</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for meal_plan in meal_plans %}
+        <tr>
+            <td>{{ meal_plan.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>
+    {% for day, meals in meal_plan.content.items() %}
+        <strong>{{ day }}</strong>:<br>
+        {% for meal_type, details in meals.items() %}
+            {{ meal_type }}: {{ details.food }} ({{ details.calories }})<br>
+        {% endfor %}
+        <br>
+    {% endfor %}
+            </td>
+            <td>
+                <form action="{{ url_for('delete_meal_plan', plan_id=meal_plan.id) }}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>You haven't generated a meal plan yet.</p>
+{% endif %}
+
+{% endblock %}
