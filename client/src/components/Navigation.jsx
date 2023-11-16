@@ -9,12 +9,11 @@ function Navigation() {
 
 	const handleLogout = async () => {
 		try {
-			await API.get("/logout", { withCredentials: true }); // Ensure credentials are included
+			await API.get("/logout", { withCredentials: true });
 			setIsLoggedIn(false);
-			navigate("/"); // Redirect to home or login page after logout
+			navigate("/");
 		} catch (error) {
 			console.error("Logout error:", error);
-			// Optionally, handle error (e.g., show error message)
 		}
 	};
 

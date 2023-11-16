@@ -19,7 +19,6 @@ class User(UserMixin, db.Model):
         return {
             "id": self.id,
             "username": self.username,
-            # include any other fields you want to include in the response
         }
 
 

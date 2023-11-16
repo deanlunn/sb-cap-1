@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, redirect, url_for
+from flask import Flask, jsonify, request,
 from flask_login import (
     LoginManager,
     login_user,
@@ -24,7 +24,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-CORS(app, supports_credentials=True)  # Enable CORS with support for cookies
+CORS(app, supports_credentials=True)
 
 
 @login_manager.user_loader
@@ -120,14 +120,13 @@ def generate_meal_route():
                         {
                             "id": new_meal_plan.id,
                             "created_at": new_meal_plan.created_at.isoformat(),
-                            "content": serialized_result,  # Send the serialized result directly
+                            "content": serialized_result,
                         }
                     ),
                     201,
                 )
 
             except Exception as e:
-                # Log the exception for debugging purposes
                 print(f"Error during serialization or database operation: {e}")
                 return jsonify({"error": "Internal server error"}), 500
 
@@ -137,7 +136,6 @@ def generate_meal_route():
 
 def call_openai_generate_meal_plan(cuisine, cal, user_details):
     print(f"Parameters: {cuisine}, {cal}, {user_details}")
-    # Extracting user details for inclusion in the OpenAI API request
     username = user_details["username"]
     age = user_details["age"]
     sex = user_details["sex"]
@@ -211,7 +209,7 @@ def process_meals(text):
 def delete_meal_plan(plan_id):
     meal_plan = MealPlan.query.get_or_404(plan_id)
     if meal_plan.user_id != current_user.id:
-        abort(403)  # Forbidden
+        abort(403)
     db.session.delete(meal_plan)
     db.session.commit()
     return jsonify({"message": "Meal plan deleted successfully"}), 200

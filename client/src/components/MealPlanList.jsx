@@ -1,5 +1,4 @@
 function MealPlanList({ mealPlans, onDeletePlan }) {
-	// Check if meal plans are still being fetched
 	if (!mealPlans) {
 		return <p>Loading meal plans...</p>;
 	}

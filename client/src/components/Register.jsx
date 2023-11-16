@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API from "../services/api"; // Ensure this path is correct for your Axios instance
+import API from "../services/api";
 
 function Register() {
 	const [formData, setFormData] = useState({
@@ -21,10 +21,9 @@ function Register() {
 		e.preventDefault();
 		try {
 			await API.post("/register", formData);
-			navigate("/login"); // Redirect to login page after successful registration
+			navigate("/login");
 		} catch (error) {
 			console.error("Registration error:", error);
-			// Handle registration errors here
 		}
 	};
 
@@ -50,7 +49,6 @@ function Register() {
 							value={formData.username}
 							onChange={handleChange}
 							required
-							className="form-input w-full"
 						/>
 					</div>
 

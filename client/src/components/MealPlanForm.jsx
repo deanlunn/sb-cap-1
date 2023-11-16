@@ -18,7 +18,6 @@ function MealPlanForm({ onNewPlanCreated }) {
 			calories: formData.calories,
 		};
 
-		// Call the onNewPlanCreated function with the form data
 		onNewPlanCreated(mealPlanData);
 	};
 

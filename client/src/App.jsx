@@ -1,11 +1,11 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./AuthContext";
 import MealPlanContext from "./MealPlanContext";
 import backgroundImage from "./assets/CuttingBoard.png";
 
 import Navigation from "./components/Navigation";
-import AppRoutes from "./components/AppRoutes"; // Import AppRoutes as a separate component
+import AppRoutes from "./components/AppRoutes";
 
 function App() {
 	const [mealPlans, setMealPlans] = useState([]);

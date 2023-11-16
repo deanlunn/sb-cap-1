@@ -26,13 +26,11 @@ export function AuthProvider({ children }) {
 					console.error("Error:", error);
 				})
 				.finally(() => {
-					// Set loading to false even if the user is not logged in
 					setLoading(false);
 				});
 		}
 	}, []);
 
-	// Store user data in localStorage whenever it changes
 	useEffect(() => {
 		if (user) {
 			localStorage.setItem("user", JSON.stringify(user));

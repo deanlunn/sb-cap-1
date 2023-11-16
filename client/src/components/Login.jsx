@@ -6,7 +6,7 @@ import API from "../services/api";
 
 function Login() {
 	const { setIsLoggedIn, setUser } = useAuth();
-	const { setMealPlans } = useContext(MealPlanContext); // Access setMealPlans from context
+	const { setMealPlans } = useContext(MealPlanContext);
 	const [credentials, setCredentials] = useState({
 		username: "",
 		password: "",
@@ -19,24 +19,22 @@ function Login() {
 	};
 
 	const handleRememberChange = (e) => {
-		setRemember(e.target.checked); // Add this line
+		setRemember(e.target.checked);
 	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
 			const response = await API.post("/login", { ...credentials, remember });
-			setIsLoggedIn(true); // Set logged-in state to true
-			setUser(response.data.user); // Store user data in state
+			setIsLoggedIn(true);
+			setUser(response.data.user);
 
-			// Fetch meal plans after successful login
 			const mealPlanResponse = await API.get("/dashboard");
-			setMealPlans(mealPlanResponse.data.meal_plans); // Store meal plans in state
+			setMealPlans(mealPlanResponse.data.meal_plans);
 
-			navigate("/dashboard"); // Redirect to dashboard after successful login
+			navigate("/dashboard");
 		} catch (error) {
 			console.error("Login error:", error);
-			// Handle login errors here (e.g., display an error message)
 		}
 	};
 

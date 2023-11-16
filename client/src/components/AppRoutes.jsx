@@ -1,15 +1,15 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useAuth } from "../AuthContext"; // Adjust the import path
+import { useAuth } from "../AuthContext";
 import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
 import Dashboard from "./Dashboard";
 
 const AppRoutes = () => {
-	const { isLoggedIn, loading } = useAuth(); // Use the useAuth hook
+	const { isLoggedIn, loading } = useAuth();
 
 	if (loading) {
-		return <div>Loading...</div>; // Add this line
+		return <div>Loading...</div>;
 	}
 
 	return (
